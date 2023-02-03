@@ -3,7 +3,12 @@
   <div v-else="pokemon" pokemon-container>
     <h1>Who's that Pokémon?</h1>
     <PokemonPictures :pokemonID="pokemonID" :showPokemon="showPokemon" />
-    <PokemonOptions :pokemonOptions="pokemonArray" @selection="checkPokemon" />
+    <!--If user select an answer, hide buttons to prevent infinite points bug-->
+    <PokemonOptions
+      v-if="!showAnswers"
+      :pokemonOptions="pokemonArray"
+      @selection="checkPokemon"
+    />
     <div v-if="showAnswers" class="answer-container">
       <h2 class="fade-in">{{ message }}</h2>
       <button class="button" @click="finishGame">Finish Game</button>
