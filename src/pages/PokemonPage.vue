@@ -95,6 +95,7 @@ export default {
             title: 'Saved!',
             text: `Your score is ${this.score}`,
             icon: 'success',
+            confirmButtonColor: '#3085d6',
           }).then(() => {
             this.leaderboard.push({
               name: result.value,
@@ -102,6 +103,9 @@ export default {
             })
             // Sort the leaderboard by score before saving it
             this.leaderboard.sort((a, b) => b.score - a.score)
+            if (this.leaderboard.length > 10) {
+              this.leaderboard.pop()
+            }
             localStorage.setItem(
               'leaderboard',
               JSON.stringify(this.leaderboard)
